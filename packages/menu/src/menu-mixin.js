@@ -1,5 +1,11 @@
 export default {
   inject: ['rootMenu'],
+  props: {
+    paddingLeft: {
+      type: Number,
+      default: 20
+    }
+  },
   computed: {
     indexPath() {
       const path = [this.index];
@@ -25,15 +31,15 @@ export default {
     paddingStyle() {
       if (this.rootMenu.mode !== 'vertical') return {};
 
-      let padding = 20;
+      let padding = this.paddingLeft;
       let parent = this.$parent;
 
       if (this.rootMenu.collapse) {
-        padding = 20;
+        padding = this.paddingLeft;
       } else {
         while (parent && parent.$options.componentName !== 'ElMenu') {
           if (parent.$options.componentName === 'ElSubmenu') {
-            padding += 20;
+            padding += this.paddingLeft;
           }
           parent = parent.$parent;
         }

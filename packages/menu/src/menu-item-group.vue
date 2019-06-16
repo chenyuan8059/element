@@ -19,21 +19,20 @@
     props: {
       title: {
         type: String
+      },
+      paddingLeft: {
+        type: Number,
+        default: 20
       }
-    },
-    data() {
-      return {
-        paddingLeft: 20
-      };
     },
     computed: {
       levelPadding() {
-        let padding = 20;
+        let padding = this.paddingLeft;
         let parent = this.$parent;
-        if (this.rootMenu.collapse) return 20;
+        if (this.rootMenu.collapse) return this.paddingLeft;
         while (parent && parent.$options.componentName !== 'ElMenu') {
           if (parent.$options.componentName === 'ElSubmenu') {
-            padding += 20;
+            padding += this.paddingLeft;
           }
           parent = parent.$parent;
         }
